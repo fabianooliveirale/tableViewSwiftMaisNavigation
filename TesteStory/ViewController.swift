@@ -23,5 +23,18 @@ class ViewController: UIViewController {
     @IBAction func buttonTableTwo(_ sender: Any) {
         performSegue(withIdentifier: "pushTableViewCustom", sender: nil)
     }
+    
+    @IBAction func buttonService(_ sender: Any) {
+        ViaCepService(search: "81900-400") { (cepIn, errorIn) in
+            DispatchQueue.main.async {
+                if cepIn != nil {
+                    self.mStreetTF.text = cepIn?.mStreet
+                    self.mStateTF.text = cepIn?.mUF
+                    self.mCityTF.text = cepIn?.mCity
+                }
+            }
+            
+        }
+    }
 }
 
